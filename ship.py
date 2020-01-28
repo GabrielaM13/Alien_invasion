@@ -1,4 +1,5 @@
 import pygame
+import os
 
 class Ship:
     """ A class to manage the ship. """
@@ -9,7 +10,8 @@ class Ship:
         self.screen_rect = ai_game.screen.get_rect()
 
         # Load the ship image and set its rect
-        self.image = pygame.image.load("d:/Studii/Python/Allien_invasion/images/ship.bmp")
+        img_path = self.get_relative_path("images/ship.bmp")
+        self.image = pygame.image.load(img_path)
         self.rect = self.image.get_rect()
 
         # Start each new ship at the bottom center of the screen
@@ -18,3 +20,8 @@ class Ship:
     def blitme(self):
         """ Draw the ship at its current position """
         self.screen.blit(self.image, self.rect)
+
+    def get_relative_path(self, path):
+        base_path = os.path.dirname(__file__)
+        relative_path = os.path.join(base_path, path)
+        return relative_path
