@@ -24,7 +24,7 @@ class Ship:
     def update(self):
         if self.moving_right:
             self.rect.x += 1
-        elif self.moving_left and self.rect.x > 0:
+        if self.moving_left and self.rect.x > 0:
             self.rect.x -= 1
 
     def blitme(self):
