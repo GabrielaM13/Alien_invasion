@@ -1,3 +1,6 @@
+import os
+
+
 class Settings:
     """ A class that stores all settings for Alien Invasion """
 
@@ -9,3 +12,8 @@ class Settings:
         self.screen_height = 600
         self.bg_color = (230, 230, 230)
         self.ship_speed = 1.5
+
+    def _get_relative_path(self, path):
+        base_path = os.path.dirname(__file__)
+        relative_path = os.path.join(base_path, path)
+        return relative_path

@@ -1,5 +1,7 @@
 import pygame
-import os
+
+from bullet import Bullet
+
 
 class Ship:
     """ A class to manage the ship. """
@@ -11,7 +13,7 @@ class Ship:
         self.settings = ai_game.settings
 
         # Load the ship image and set its rect
-        img_path = self.get_relative_path("images/ship.bmp")
+        img_path = self.settings._get_relative_path("images/ship.bmp")
         self.image = pygame.image.load(img_path)
         self.rect = self.image.get_rect()
 
@@ -23,6 +25,8 @@ class Ship:
         self.moving_right = False
         self.moving_left = False
 
+        self.bullet = Bullet(self)
+
     def update(self):
         if self.moving_right and self.rect.right < self.screen_rect.right:
             self.x += self.settings.ship_speed
@@ -33,8 +37,3 @@ class Ship:
     def blitme(self):
         """ Draw the ship at its current position """
         self.screen.blit(self.image, self.rect)
-
-    def get_relative_path(self, path):
-        base_path = os.path.dirname(__file__)
-        relative_path = os.path.join(base_path, path)
-        return relative_path
