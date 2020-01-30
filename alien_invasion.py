@@ -26,6 +26,12 @@ class AlienInvasion:
             self.ship.update()
             self.bullets.update()
             self._update_screen()
+            self.delete_not_needed_bullets()
+    
+    def delete_not_needed_bullets(self):
+        for bullet in self.bullets.copy():
+            if bullet.rect.bottom <= 0:
+                self.bullets.remove(bullet)
 
     def _check_events(self):
         """ Respond to keypressed and mouse events """
@@ -49,8 +55,9 @@ class AlienInvasion:
             self._fire_bullet()
 
     def _fire_bullet(self):
-        new_bullet = Bullet(self)
-        self.bullets.add(new_bullet)
+        if len(self.bullets) < self.settings.bullets_allowed:
+            new_bullet = Bullet(self)
+            self.bullets.add(new_bullet)
 
     def _check_keyup_events(self, event):
         if event.key == pygame.K_RIGHT:
