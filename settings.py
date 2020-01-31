@@ -22,6 +22,10 @@ class Settings:
         self.bullet_color = (60, 60, 60)
         self.bullets_allowed = 3
 
+        # Alien settings
+        self.alien_speed = 0.5
+        self.alien_down_speed = 15
+
     def _get_relative_path(self, path):
         base_path = os.path.dirname(__file__)
         relative_path = os.path.join(base_path, path)
