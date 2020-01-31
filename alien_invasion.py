@@ -29,10 +29,14 @@ class AlienInvasion:
         available_space_x = self.settings.screen_width - (2 * alien_width)
         number_aliens = available_space_x // ( 2 * alien_width)
         for alien_number in range(number_aliens):
-            fleet_alien = Alien(self)
-            fleet_alien.x = alien_width + 2 * alien_width * alien_number
-            fleet_alien.rect.x = fleet_alien.x
-            self.aliens.add(fleet_alien)
+            self._create_alien(alien_width, alien_number)
+
+    def _create_alien(self, alien_width, alien_number):
+        """ Create alien and add it in the row """ 
+        fleet_alien = Alien(self)
+        fleet_alien.x = alien_width + 2 * alien_width * alien_number
+        fleet_alien.rect.x = fleet_alien.x
+        self.aliens.add(fleet_alien)
 
     def run_game(self):
         """ Start the main loop for the game """
