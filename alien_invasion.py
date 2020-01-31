@@ -99,10 +99,28 @@ class AlienInvasion:
         self.ship.blitme()
         for bullet in self.bullets:
             bullet.draw_bullet()
-        self.aliens.draw(self.screen)
+        self._update_aliens()
         
         # Make the most recently drawn screen visible
         pygame.display.flip()
+
+    def _update_aliens(self):
+        """ Updates the position of all aliens in the fleet """
+        self._check_fleet_edges()
+        self.aliens.draw(self.screen)
+    
+    def _check_fleet_edges(self):
+        """ Respond appropriately if any aliens have reached an edge. """
+        for alien in self.aliens.sprites():
+            if alien.check_edges():
+                self._change_fleet_direction()
+                break
+
+    def _change_fleet_direction(self):
+        """ Drop the entire ship and change the fleet's direction """
+        for alien in self.aliens.sprites():
+            alien.rect.y += self.settings.alien_down_speed
+        self.settings.fleet_direction *= -1 
 
     def set_fullscreen(self):
         """ Sets the game in fullscreen mode """

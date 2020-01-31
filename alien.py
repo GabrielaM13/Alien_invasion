@@ -25,18 +25,10 @@ class Alien(Sprite):
         self.is_moving_right = True
     
     def update(self):
-        """ 
-        if self.is_moving_right and self.rect.x < self.screen_rect.right:
-            self.x += self.settings.alien_speed
-            self.rect.x = self.x
-        elif (self.is_moving_right and self.rect.x == self.screen_rect.right) or (not self.is_moving_right and self.rect.x == 0):
-            self.y += self.settings.alien_down_speed
-            self.rect.y = self.y
-            if self.is_moving_right:
-                self.is_moving_right = False
-            else:
-                self.is_moving_right = True
-        elif self.is_moving_right == False and self.rect.x > 0:
-            self.x -= self.settings.alien_speed
-            self.rect.x = self.x
-        """
+        self.x += (self.settings.alien_speed * self.settings.fleet_direction)
+        self.rect.x = self.x
+
+    def check_edges(self):
+        """ Return true if alien is at the edge of the screen """ 
+        if self.rect.right >= self.screen_rect.right or self.rect.left <= 0:
+            return True

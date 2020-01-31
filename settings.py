@@ -24,7 +24,9 @@ class Settings:
 
         # Alien settings
         self.alien_speed = 0.5
-        self.alien_down_speed = 15
+        self.alien_down_speed = 10 
+        # fleet direction of 1 represent right: -1 represents left
+        self.fleet_direction = 1
 
     def _get_relative_path(self, path):
         base_path = os.path.dirname(__file__)
