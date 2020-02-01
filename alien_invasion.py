@@ -97,25 +97,30 @@ class AlienInvasion:
         """" Redraw the screen during each pass trough the loop """
         self.screen.fill(self.settings.bg_color)
         self.ship.blitme()
-        for bullet in self.bullets:
-            bullet.draw_bullet()
+        self._update_bullets()
         self._update_aliens()
         
         # Make the most recently drawn screen visible
         pygame.display.flip()
 
-    def _update_aliens(self):
-        """ Updates the position of all aliens in the fleet """
-        self._check_fleet_edges()
-        self.aliens.draw(self.screen)
+    def _update_bullets(self):
+        for bullet in self.bullets:
+            bullet.draw_bullet()
+        self._check_bullet_alien_collisions()
 
+    def _check_bullet_alien_collisions(self):
         # Check for any bullets that have hit aliens
         # If so, get rid of the bullets and of the aliens
-        collisions = pygame.sprite.groupcollide(self.bullets, self.aliens, False, True)
+        pygame.sprite.groupcollide(self.bullets, self.aliens, True, True)
         if not self.aliens:
             # Destroy existing bullets and create new fleet
             self.bullets.empty()
             self._create_fleet()
+
+    def _update_aliens(self):
+        """ Updates the position of all aliens in the fleet """
+        self._check_fleet_edges()
+        self.aliens.draw(self.screen)
     
     def _check_fleet_edges(self):
         """ Respond appropriately if any aliens have reached an edge. """
