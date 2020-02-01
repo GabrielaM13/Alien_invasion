@@ -1,6 +1,7 @@
 import sys
 import pygame
 from time import sleep
+import os
 
 from settings import Settings
 from ship import Ship
@@ -13,6 +14,9 @@ class AlienInvasion:
 
     def __init__(self):
         """ Initialize the game and creates game resources. """
+        # Made the window be displayed at the center of the screen
+        os.environ['SDL_VIDEO_CENTERED'] = '1'
+
         pygame.init()
         self.settings = Settings()
 
