@@ -14,8 +14,8 @@ class Settings:
         self.ship_limit = 3
 
         # Bullet settings
-        self.bullet_types = ["sprite", "rocks"]
-        self.bullet_type = "sprite"
+        self.bullet_types = ["sprite", "rock", "heart"]
+        self.bullet_type = "heart"
         self.bullet_width = 3
         self.bullet_height = 15
         self.bullet_color = (60, 60, 60)

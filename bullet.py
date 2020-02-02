@@ -21,15 +21,19 @@ class Bullet(Sprite):
         if self.settings.bullet_type == "sprite":
             self.initialize_sprite()
         else:
-            self.initialize_rock()
+            self.initialize_image()
 
     def initialize_sprite(self):
          # Create a bullet rect at (0, 0) and then set correct position
         self.rect = pygame.Rect(0, 0, self.settings.bullet_width, self.settings.bullet_height)
 
-    def initialize_rock(self):
+    def initialize_image(self):
         # Load the ship image and set its rect
-        img_path = self.settings._get_relative_path("images/bullet.bmp")
+        if self.settings.bullet_type == "rock":
+            img = "images/rock.bmp"
+        elif self.settings.bullet_type == "heart":
+            img = "images/heart.bmp"
+        img_path = self.settings._get_relative_path(img)
         self.image = pygame.image.load(img_path)
         self.rect = self.image.get_rect()
 
