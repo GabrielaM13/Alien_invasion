@@ -28,6 +28,9 @@ class Settings:
         self.speed_up_scale = 1.5
         self.initialize_dynamic_settings()
 
+        # How quickly the alien point values increase
+        self.score_scole = 1.5
+
     def _get_relative_path(self, path):
         base_path = os.path.dirname(__file__)
         relative_path = os.path.join(base_path, path)
@@ -46,7 +49,8 @@ class Settings:
         self.alien_points = 50
 
     def increase_speed(self):
-        """ Increade speed settings """
+        """ Increade speed settings and alien point values """
         self.ship_speed *= self.speed_up_scale
         self.bullet_speed *= self.speed_up_scale
         self.alien_speed *= self.speed_up_scale
+        self.alien_points = int(self.alien_points * self.score_scole)
