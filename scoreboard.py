@@ -47,8 +47,8 @@ class Scoreboard:
 
         # Position the level below the score
         self.level_rect = self.level_image.get_rect()
-        self.level_rect.right = self.screen_rect.right - 20
-        self.level_rect.top = self.score_rect.bottom + 10
+        self.level_rect.right = self.screen_rect.right - self.score_rect.width - 20 - self.level_rect.width - 20
+        self.level_rect.top = 20
 
     def show_score(self):
         """ Draw the scores and level to the screen """
