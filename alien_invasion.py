@@ -81,7 +81,7 @@ class AlienInvasion:
         """ Respond to keypressed and mouse events """
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
-                sys.exit()
+                self.exit_game()
             elif event.type == pygame.KEYDOWN:
                self._check_keydown_events(event)
             elif event.type == pygame.KEYUP:
@@ -124,11 +124,15 @@ class AlienInvasion:
         elif event.key == pygame.K_LEFT:
             self.ship.moving_left = True
         elif event.key == pygame.K_q:
-            sys.exit()
+            self.exit_game()
         elif event.key == pygame.K_SPACE:
             self._fire_bullet()
         elif event.key == pygame.K_p:
             self._prepare_game_to_play()
+
+    def exit_game(self):
+        self.stats.save_high_score()
+        sys.exit()
 
     def _fire_bullet(self):
         if len(self.bullets) < self.settings.bullets_allowed:
@@ -202,7 +206,7 @@ class AlienInvasion:
         # Decrement ships left
         self.stats.ships_left -= 1
         self.scoreboard.prep_ships()
-        
+
         if(self.stats.ships_left > 0):
             #Get rid of any remaining aliens and bullets
             self.aliens.empty()
