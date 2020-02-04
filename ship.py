@@ -1,19 +1,22 @@
 import pygame
 
+from pygame.sprite import Sprite
+
 from bullet import Bullet
 
 
-class Ship:
+class Ship(Sprite):
     """ A class to manage the ship. """
 
-    def __init__(self, ai_game):
+    def __init__(self, ai_game, is_small = False):
         """ Initialize the ship and set its starting position """
+        super().__init__()
         self.screen = ai_game.screen
         self.screen_rect = ai_game.screen.get_rect()
         self.settings = ai_game.settings
 
-        # Load the ship image and set its rect
-        img_path = self.settings._get_relative_path("images/ship.bmp")
+        # Load the ship image and set its rect      
+        img_path = self.get_image_path(is_small)
         self.image = pygame.image.load(img_path)
         self.rect = self.image.get_rect()
 
@@ -24,6 +27,13 @@ class Ship:
         # Movement flag
         self.moving_right = False
         self.moving_left = False
+
+    def get_image_path(self, is_small):
+        if is_small:
+            img = "images/ship_small.bmp"
+        else:
+            img = "images/ship.bmp"
+        return self.settings._get_relative_path(img)
 
     def update(self):
         if self.moving_right and self.rect.right < self.screen_rect.right:
